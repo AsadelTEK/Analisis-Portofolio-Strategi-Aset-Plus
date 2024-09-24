@@ -3,7 +3,7 @@
 
 ## Deskripsi Program
 
-"Analisis Portofolio: Strategi Aset Plus" adalah aplikasi berbasis web yang dirancang untuk membantu pengguna dalam melakukan analisis portofolio investasi. Aplikasi ini dibangun menggunakan framework CodeIgniter, Bootstrap untuk frontend, dan MySQL sebagai basis data. Pengguna dapat membuat, mengelola, dan menganalisis portofolio aset mereka dengan mudah.
+"Analisis Portofolio: Strategi Aset Plus" adalah aplikasi berbasis web yang dirancang untuk membantu pengguna dalam melakukan analisis portofolio investasi. Aplikasi ini dibangun menggunakan framework CodeIgniter, Bootstrap untuk frontend, dan MySQL atau SQLite sebagai basis data. Pengguna dapat membuat, mengelola, dan menganalisis portofolio aset mereka dengan mudah.
 
 ### Fitur Utama
 - **Manajemen Pengguna:** Registrasi dan login untuk mengakses fitur aplikasi.
@@ -31,23 +31,19 @@ Berikut adalah langkah-langkah untuk menginstal aplikasi ini menggunakan GitHub 
     cd portfolio_analysis
     ```
 
-### 3. Jalankan Script Setup
-1. Jalankan script setup untuk mengunduh dan mengonfigurasi CodeIgniter dan Bootstrap:
+### 3. Pilih Database: MySQL atau SQLite
+
+#### a. Instalasi Menggunakan MySQL
+1. Jalankan script setup untuk MySQL:
     ```bash
     bash setup_ci_portfolio_analysis.sh
     ```
-2. Script ini akan melakukan hal berikut:
-   - Mengunduh framework CodeIgniter versi terbaru.
-   - Mengunduh file CSS dan JS Bootstrap.
-   - Membuat struktur direktori dan file MVC dasar untuk aplikasi.
-
-### 4. Konfigurasi Database
-1. Buat database baru di MySQL dengan nama `portfolio_analysis`.
-2. Impor file SQL untuk skema database:
+2. Buat database baru di MySQL dengan nama `portfolio_analysis`.
+3. Impor file SQL untuk skema database:
     ```bash
     mysql -u root -p portfolio_analysis < /mnt/data/portfolio_analysis_schema.sql
     ```
-3. Ubah konfigurasi database pada file `.env`:
+4. Ubah konfigurasi database pada file `.env`:
     ```
     database.default.hostname = localhost
     database.default.database = portfolio_analysis
@@ -55,15 +51,27 @@ Berikut adalah langkah-langkah untuk menginstal aplikasi ini menggunakan GitHub 
     database.default.password = <password-anda>
     ```
 
-### 5. Jalankan Aplikasi
+#### b. Instalasi Menggunakan SQLite
+1. Jalankan script setup untuk SQLite:
+    ```bash
+    bash setup_ci_portfolio_analysis_sqlite.sh
+    ```
+2. Script ini akan membuat file database `portfolio_analysis.db` di direktori `writable/database`.
+3. Ubah konfigurasi database pada file `.env`:
+    ```
+    database.default.DBDriver = SQLite3
+    database.default.database = writable/database/portfolio_analysis.db
+    ```
+
+### 4. Jalankan Aplikasi
 1. Jalankan server pengembangan CodeIgniter dengan perintah berikut:
     ```bash
     php spark serve
     ```
 2. Buka browser dan akses `http://localhost:8080` untuk melihat aplikasi berjalan.
 
-### 6. Catatan Tambahan
-- Pastikan environment Codespace memiliki `PHP`, `MySQL`, dan `Composer` yang terinstal.
+### 5. Catatan Tambahan
+- Pastikan environment Codespace memiliki `PHP`, `MySQL` (jika menggunakan MySQL), dan `Composer` yang terinstal.
 - Anda bisa mengedit dan menambah fitur sesuai kebutuhan Anda.
 
 Jika ada pertanyaan atau masalah, silakan buka [Issues](https://github.com/username/repository/issues) atau hubungi kami melalui email.
